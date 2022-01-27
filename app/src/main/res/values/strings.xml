@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Crazy Rocket</string>
+    <string name="level">Difficulty Level:</string>
+    <string name="hand">Motion control</string>
+
+    <string name="handcontrol">You can control the rocket up and down by using the control gesture.Start moving now!</string>
+    <string name="currentscore">current score</string>
+    <string name="gameover">Game Over</string>
+
+    <string name="hight">Hight</string>
+    <string name="middle">middle</string>
+    <string name="low">low</string>
+    <string name="cancel">Cancel</string>
+    <string name="score">score：</string>
+
+</resources>
