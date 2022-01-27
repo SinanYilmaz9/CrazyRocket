@@ -12,7 +12,8 @@ import com.huawei.hms.mlsdk.handkeypoint.MLHandKeypointAnalyzerFactory
 import java.io.IOException
 
 object GameUtils {
-    private val TAG = "FaceUtils"
+
+    private const val TAG = "GameUtils"
     private var analyzer : MLHandKeypointAnalyzer? = null
 
     @SuppressLint("StaticFieldLeak")
@@ -28,10 +29,11 @@ object GameUtils {
         analyzer?.setTransactor(HandKeyPointTransactor(gameGraphic))
     }
 
-    fun getMagnification(context: Context?): Float {
+    fun getMagnification(): Float {
         var magnification = 1
         val camera = Camera.open(1)
         val supportedPreviewSizes = camera.parameters.supportedPreviewSizes
+
         for (i in supportedPreviewSizes.indices.reversed()) {
             width = supportedPreviewSizes[i].width
             height = supportedPreviewSizes[i].height
@@ -61,9 +63,7 @@ object GameUtils {
                 preview.start(lensEngine)
             } catch (e: IOException) {
                 Log.e(TAG, "Failed to start lens engine.", e)
-                lensEngine?.let {
-                    it.release()
-                }
+                lensEngine?.release()
                 lensEngine = null
             }
         }
@@ -74,11 +74,7 @@ object GameUtils {
     }
 
     fun releaseAnalyze() {
-        lensEngine?.let {
-            it.release()
-        }
-        analyzer?.let {
-            it.destroy()
-        }
+        lensEngine?.release()
+        analyzer?.destroy()
     }
 }

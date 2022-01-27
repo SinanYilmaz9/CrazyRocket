@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.hms.crazyrocket.R
 import com.hms.crazyrocket.camera.LensEnginePreview
 import com.hms.crazyrocket.databinding.ActivityHandGameBinding
 import com.hms.crazyrocket.view.GameGraphic
@@ -34,8 +35,8 @@ class HandGameActivity : AppCompatActivity() {
 
         val intent = intent
         if (intent != null) {
-            level = intent.getIntExtra("level", 4)
-            magnification = intent.getFloatExtra("magnification", 1f)
+            level = intent.getIntExtra(getString(R.string.level), 4)
+            magnification = intent.getFloatExtra(getString(R.string.magnification), 1f)
         }
         gameGraphic?.initData(this,binding.gameover,binding.score, level, magnification)
 

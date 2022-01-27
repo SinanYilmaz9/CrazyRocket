@@ -23,13 +23,15 @@ class MainActivity : AppCompatActivity() {
 
     private val binding by viewBinding(ActivityMainBinding::inflate)
 
-    private val TAG = MainActivity::class.java.simpleName
+    companion object {
+        private val PERMISSIONS = arrayOf(Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        )
 
-    private val PERMISSIONS = arrayOf(
-        Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE
-    )
-    private val REQUEST_CODE = 1
+        private const val REQUEST_CODE = 1
+    }
+
 
     private var radioGroup: RadioGroup? = null
     private var cancel: AppCompatButton? = null
@@ -66,21 +68,21 @@ class MainActivity : AppCompatActivity() {
         binding.hand.setOnClickListener {
 
             if (!isGranted(Manifest.permission.CAMERA)) {
-                requestPermission(PERMISSIONS, REQUEST_CODE)
+                requestPermission()
             }
             else {
                 GameUtils.createHandAnalyze()
-                magnification = GameUtils.getMagnification(this@MainActivity) + 0.5f
+                magnification = GameUtils.getMagnification() + 0.5f
                 GameUtils.initLensEngine(this@MainActivity)
 
                 val handIntent = Intent(this@MainActivity, HandGameActivity::class.java)
 
                 when (choice) {
-                    0 -> handIntent.putExtra("level", 8)
-                    1 -> handIntent.putExtra("level", 4)
-                    2 -> handIntent.putExtra("level", 1)
+                    0 -> handIntent.putExtra(getString(R.string.level), 8)
+                    1 -> handIntent.putExtra(getString(R.string.level), 4)
+                    2 -> handIntent.putExtra(getString(R.string.level), 1)
                 }
-                handIntent.putExtra("magnification", magnification)
+                handIntent.putExtra(getString(R.string.magnification), magnification)
                 startActivity(handIntent)
             }
         }
@@ -112,8 +114,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initData() {
-        pickString =
-            arrayOf(getString(R.string.hight), getString(R.string.middle), getString(R.string.low))
+        pickString = arrayOf(getString(R.string.hight), getString(R.string.middle), getString(R.string.low))
     }
 
     private fun isGranted(permission: String): Boolean {
@@ -121,9 +122,9 @@ class MainActivity : AppCompatActivity() {
         return checkSelfPermission == PackageManager.PERMISSION_GRANTED
     }
 
-    private fun requestPermission(permissions: Array<String>, requestCode: Int): Boolean {
-        if (!isGranted(permissions[0])) {
-            requestPermissions(permissions, requestCode)
+    private fun requestPermission(): Boolean {
+        if (!isGranted(PERMISSIONS[0])) {
+            requestPermissions(PERMISSIONS, REQUEST_CODE)
         }
         return true
     }

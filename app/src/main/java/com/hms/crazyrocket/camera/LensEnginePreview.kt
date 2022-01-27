@@ -8,7 +8,7 @@ import android.util.Log
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import com.hms.crazyrocket.util.CrazyRocketSurfaceHolder
-import com.hms.crazyrocket.view.GraphicOverlay
+import com.hms.crazyrocket.view.overlay.GraphicOverlay
 import com.huawei.hms.common.size.Size
 import com.huawei.hms.mlsdk.common.LensEngine
 import java.io.IOException

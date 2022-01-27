@@ -1,7 +1,6 @@
-package com.hms.crazyrocket.view
+package com.hms.crazyrocket.view.overlay
 
 import android.graphics.Canvas
-import com.hms.crazyrocket.view.GraphicOverlay
 
 abstract class BaseGraphic(overlay: GraphicOverlay) {
 
@@ -19,6 +18,5 @@ abstract class BaseGraphic(overlay: GraphicOverlay) {
     open fun scaleY(y: Float): Float {
         return y * graphicOverlay!!.getHeightScaleValue()
     }
-
 
 }

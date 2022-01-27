@@ -16,15 +16,14 @@ class HandKeyPointTransactor(gameGraphic: GameGraphic) : MLAnalyzer.MLTransactor
 
     override fun transactResult(results: MLAnalyzer.Result<MLHandKeypoints?>) {
         val analyseList: SparseArray<MLHandKeypoints?>? = results.analyseList
-        if (analyseList == null || analyseList.size() <= 0) {
+
+        if (analyseList == null || analyseList.size() <= 0)
             return
-        }
+
         val centerY: Int = analyseList[0]?.rect!!.centerY()
         gameGraphic!!.setOffset(centerY.toFloat())
         gameGraphic!!.invalidate()
     }
 
-    override fun destroy() {
-
-    }
+    override fun destroy() {}
 }

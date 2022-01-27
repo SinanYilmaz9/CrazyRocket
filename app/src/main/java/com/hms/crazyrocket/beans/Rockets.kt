@@ -45,11 +45,11 @@ class Rockets (context: Context, width: Int, height: Int) {
     }
 
     fun pass(col1: Obstacle, col2: Obstacle, level: Int): Boolean {
-        var level = level
+        var mLevel = level
         if (level % 2 != 0) {
-            level += 1
+            mLevel += 1
         }
-        return x >= col1.x - level / 2 && x < col1.x + level / 2 || x >= col2.x - level / 2 && x < col2.x + level / 2
+        return x >= col1.x - mLevel / 2 && x < col1.x + mLevel / 2 || x >= col2.x - mLevel / 2 && x < col2.x + mLevel / 2
     }
 
     fun hit(column1: Obstacle?, column2: Obstacle?): Boolean {

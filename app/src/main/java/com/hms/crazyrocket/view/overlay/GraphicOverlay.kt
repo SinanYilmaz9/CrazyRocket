@@ -1,10 +1,11 @@
-package com.hms.crazyrocket.view
+package com.hms.crazyrocket.view.overlay
 
 import android.content.Context
 import android.graphics.Canvas
 import android.hardware.Camera
 import android.util.AttributeSet
 import android.view.View
+import com.hms.crazyrocket.view.overlay.BaseGraphic
 
 class GraphicOverlay @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) :
     View(context, attrs) {
