@@ -20,8 +20,8 @@ class HandKeyPointTransactor(gameGraphic: GameGraphic) : MLAnalyzer.MLTransactor
             return
 
         val centerY: Int = analyseList[0]?.rect!!.centerY()
-        gameGraphic!!.setOffset(centerY.toFloat())
-        gameGraphic!!.invalidate()
+        gameGraphic?.setOffset(centerY.toFloat())
+        gameGraphic?.invalidate()
     }
 
     override fun destroy() {}

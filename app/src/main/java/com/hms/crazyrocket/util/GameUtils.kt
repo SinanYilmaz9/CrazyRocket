@@ -55,10 +55,8 @@ object GameUtils {
             .create()
     }
 
-
     //start preview
     fun startLensEngine(preview: LensEnginePreview) {
-        lensEngine?.let {
             try {
                 preview.start(lensEngine)
             } catch (e: IOException) {
@@ -66,7 +64,6 @@ object GameUtils {
                 lensEngine?.release()
                 lensEngine = null
             }
-        }
     }
 
     fun stopPreview(mPreview: LensEnginePreview) {
