@@ -11,9 +11,7 @@ import androidx.core.content.ContextCompat
 import com.hms.crazyrocket.R
 import com.hms.crazyrocket.util.SizeUtils
 
-class World (context : Context ,gameover : RelativeLayout,score:TextView,level: Int,magnification: Float) {
-
-    private lateinit var context: Context
+class World (var context : Context ,gameover : RelativeLayout,score:TextView,level: Int,magnification: Float) {
 
     private var gameStart = false
     private var score = 0
