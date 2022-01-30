@@ -15,5 +15,6 @@
     <string name="level">level</string>
     <string name="magnification">magnification</string>
     <string name="hms_ml_kit">HMS ML Kit</string>
+    <string name="not_start_camera">Could not start camera source.</string>
 
 </resources>

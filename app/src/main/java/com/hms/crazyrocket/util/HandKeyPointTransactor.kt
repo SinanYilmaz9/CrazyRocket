@@ -13,7 +13,6 @@ class HandKeyPointTransactor(gameGraphic: GameGraphic) : MLAnalyzer.MLTransactor
         this.gameGraphic = gameGraphic
     }
 
-
     override fun transactResult(results: MLAnalyzer.Result<MLHandKeypoints?>) {
         val analyseList: SparseArray<MLHandKeypoints?>? = results.analyseList
 

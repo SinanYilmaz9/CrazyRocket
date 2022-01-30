@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import com.hms.crazyrocket.R
 import com.hms.crazyrocket.util.CrazyRocketSurfaceHolder
 import com.hms.crazyrocket.view.overlay.GraphicOverlay
 import com.huawei.hms.common.size.Size
@@ -27,7 +28,6 @@ class LensEnginePreview(var mContext: Context, attrs: AttributeSet) : ViewGroup(
     private var mLensEngine: LensEngine? = null
     private val mOverlay: GraphicOverlay? = null
 
-
     init {
         mContext = context
         mStartRequested = false
@@ -41,7 +41,7 @@ class LensEnginePreview(var mContext: Context, attrs: AttributeSet) : ViewGroup(
                 try {
                     startIfReady()
                 } catch (e: IOException) {
-                    Log.e(TAG, "Could not start camera source.", e)
+                    Log.e(TAG, mContext.getString(R.string.not_start_camera), e)
                 }
             }
             override fun surfaceDestroyed(holder: SurfaceHolder) {
@@ -65,9 +65,7 @@ class LensEnginePreview(var mContext: Context, attrs: AttributeSet) : ViewGroup(
     }
 
     fun stop() {
-        mLensEngine?.let {
-            it.close()
-        }
+        mLensEngine?.close()
     }
 
     @Throws(IOException::class)
@@ -144,9 +142,7 @@ class LensEnginePreview(var mContext: Context, attrs: AttributeSet) : ViewGroup(
         try {
             this.startIfReady()
         } catch (e: IOException) {
-            Log.e(TAG, "Could not start camera source.", e)
+            Log.e(TAG, mContext.getString(R.string.not_start_camera), e)
         }
-
     }
-
 }

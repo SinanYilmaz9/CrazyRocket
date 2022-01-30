@@ -53,7 +53,6 @@ class World (context : Context ,gameover : RelativeLayout,score:TextView,level: 
 
 
     init {
-        this.context = context
         this.gameover = gameover
         this.level = level
         this.magnification = magnification

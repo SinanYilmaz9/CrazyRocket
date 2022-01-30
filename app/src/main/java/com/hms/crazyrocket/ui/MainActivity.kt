@@ -26,12 +26,10 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private val PERMISSIONS = arrayOf(Manifest.permission.CAMERA,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        )
+            Manifest.permission.READ_EXTERNAL_STORAGE)
 
         private const val REQUEST_CODE = 1
     }
-
 
     private var radioGroup: RadioGroup? = null
     private var cancel: AppCompatButton? = null
@@ -62,7 +60,6 @@ class MainActivity : AppCompatActivity() {
             this?.setGravity(Gravity.BOTTOM)
         }
     }
-
 
     private fun initListener() {
         binding.hand.setOnClickListener {
@@ -111,7 +108,6 @@ class MainActivity : AppCompatActivity() {
             dialog?.dismiss()
         }
     }
-
 
     private fun initData() {
         pickString = arrayOf(getString(R.string.hight), getString(R.string.middle), getString(R.string.low))

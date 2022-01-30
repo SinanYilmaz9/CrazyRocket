@@ -33,10 +33,9 @@ class HandGameActivity : AppCompatActivity() {
         mPreview = binding.preview
         gameGraphic = binding.graphic
 
-        val intent = intent
-        if (intent != null) {
-            level = intent.getIntExtra(getString(R.string.level), 4)
-            magnification = intent.getFloatExtra(getString(R.string.magnification), 1f)
+        intent?.let { i->
+            level = i.getIntExtra(getString(R.string.level), 4)
+            magnification = i.getFloatExtra(getString(R.string.magnification), 1f)
         }
         gameGraphic?.initData(this,binding.gameover,binding.score, level, magnification)
 
