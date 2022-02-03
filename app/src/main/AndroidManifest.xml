@@ -25,7 +25,7 @@
 
         <activity android:name=".ui.HandGameActivity" android:screenOrientation="fullSensor"/>
 
-        <meta-data android:name="com.huawei.hms.ml.DEPENDENCY" android:value="handkeypoint"/>
+        <!-- TODO : meta-data for handkeypoint -->
     </application>
 
 </manifest>
