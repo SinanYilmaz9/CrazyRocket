@@ -1,7 +1,6 @@
 package com.hms.crazyrocket.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.hms.crazyrocket.R
@@ -39,7 +38,9 @@ class HandGameActivity : AppCompatActivity() {
         }
         gameGraphic?.initData(this,binding.gameover,binding.score, level, magnification)
 
-        gameGraphic?.let { GameUtils.setHandTransactor(it) }
+        gameGraphic?.let {
+            // TODO : get HandTransactor
+        }
     }
 
     private fun initListeners() {

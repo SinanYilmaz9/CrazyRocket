@@ -22,11 +22,11 @@ object GameUtils {
     var height = 0
 
     fun createHandAnalyze() {
-        analyzer = MLHandKeypointAnalyzerFactory.getInstance().handKeypointAnalyzer
+        // TODO : Create Hand Analyzer
     }
 
     fun setHandTransactor(gameGraphic: GameGraphic) {
-        analyzer?.setTransactor(HandKeyPointTransactor(gameGraphic))
+        // TODO : Set Hand Transactor
     }
 
     fun getMagnification(): Float {
@@ -47,12 +47,7 @@ object GameUtils {
     }
 
     fun initLensEngine(context: Context?) {
-        lensEngine = LensEngine.Creator(context, analyzer)
-            .setLensType(LensEngine.FRONT_LENS)
-            .applyDisplayDimension(width, height)
-            .applyFps(30.0f)
-            .enableAutomaticFocus(true)
-            .create()
+        // TODO : Initialize LensEngine
     }
 
     //start preview

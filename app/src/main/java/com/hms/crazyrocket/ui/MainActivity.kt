@@ -68,9 +68,10 @@ class MainActivity : AppCompatActivity() {
                 requestPermission()
             }
             else {
-                GameUtils.createHandAnalyze()
+                // TODO : get HandAnalyzer
+
                 magnification = GameUtils.getMagnification() + 0.5f
-                GameUtils.initLensEngine(this@MainActivity)
+                // TODO : get initiliaze lensEngine
 
                 val handIntent = Intent(this@MainActivity, HandGameActivity::class.java)
 
