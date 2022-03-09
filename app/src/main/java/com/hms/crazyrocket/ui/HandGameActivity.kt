@@ -15,7 +15,7 @@ class HandGameActivity : AppCompatActivity() {
 
     private val binding by viewBinding(ActivityHandGameBinding::inflate)
 
-    private var mPreview: LensEnginePreview? = null
+    private var lensEnginePreview: LensEnginePreview? = null
     private var gameGraphic: GameGraphic? = null
 
     private var level = 4
@@ -30,7 +30,7 @@ class HandGameActivity : AppCompatActivity() {
     }
 
     private fun setup() {
-        mPreview = binding.preview
+        lensEnginePreview = binding.preview
         gameGraphic = binding.graphic
 
         intent?.let { i->
@@ -60,16 +60,16 @@ class HandGameActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        mPreview?.let { GameUtils.startLensEngine(it) }
+        lensEnginePreview?.let { GameUtils.startLensEngine(it) }
     }
 
     override fun onPause() {
         super.onPause()
-        mPreview?.let { GameUtils.stopPreview(it) }
+        lensEnginePreview?.let { GameUtils.stopPreview(it) }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        GameUtils.releaseAnalyze()
+        GameUtils.releaseAnalyze(1)
     }
 }

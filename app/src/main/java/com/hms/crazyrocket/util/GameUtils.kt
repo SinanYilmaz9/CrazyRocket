@@ -5,38 +5,51 @@ import android.content.Context
 import android.hardware.Camera
 import android.util.Log
 import com.hms.crazyrocket.camera.LensEnginePreview
-import com.hms.crazyrocket.view.GameGraphic
+import com.hms.crazyrocket.util.transactor.FaceAnalyzerTransactor
+import com.hms.crazyrocket.util.transactor.HandKeyPointTransactor
 import com.huawei.hms.mlsdk.common.LensEngine
-import com.huawei.hms.mlsdk.handkeypoint.MLHandKeypointAnalyzer
 import com.huawei.hms.mlsdk.handkeypoint.MLHandKeypointAnalyzerFactory
 import java.io.IOException
+import com.hms.crazyrocket.view.GameGraphic
+import com.huawei.hms.mlsdk.MLAnalyzerFactory
+import com.huawei.hms.mlsdk.face.MLFaceAnalyzer
+import com.huawei.hms.mlsdk.handkeypoint.MLHandKeypointAnalyzer
+
 
 object GameUtils {
 
     private const val TAG = "GameUtils"
-    private var analyzer : MLHandKeypointAnalyzer? = null
+    private var faceAnalyzer : MLFaceAnalyzer? = null
+    private var handAnalyzer : MLHandKeypointAnalyzer? = null
 
     @SuppressLint("StaticFieldLeak")
     private var lensEngine: LensEngine? = null
     var width = 0
     var height = 0
 
-    fun createHandAnalyze() {
-        analyzer = MLHandKeypointAnalyzerFactory.getInstance().handKeypointAnalyzer
+    fun createFaceAnalyze() {
+        faceAnalyzer = MLAnalyzerFactory.getInstance().faceAnalyzer
     }
 
-    fun setHandTransactor(gameGraphic: GameGraphic) {
-        analyzer?.setTransactor(HandKeyPointTransactor(gameGraphic))
+    fun createHandAnalyze() {
+        handAnalyzer = MLHandKeypointAnalyzerFactory.getInstance().handKeypointAnalyzer
     }
+
+    fun setFaceTransactor(gameGraphic: GameGraphic) =
+        faceAnalyzer?.setTransactor(FaceAnalyzerTransactor(gameGraphic))
+
+    fun setHandTransactor(gameGraphic: GameGraphic) =
+        handAnalyzer?.setTransactor(HandKeyPointTransactor(gameGraphic))
 
     fun getMagnification(): Float {
-        var magnification = 1
+        val magnification: Int
         val camera = Camera.open(1)
         val supportedPreviewSizes = camera.parameters.supportedPreviewSizes
 
         for (i in supportedPreviewSizes.indices.reversed()) {
             width = supportedPreviewSizes[i].width
             height = supportedPreviewSizes[i].height
+
             if (width >= 300 && height >= 300) {
                 break
             }
@@ -46,16 +59,24 @@ object GameUtils {
         return magnification.toFloat()
     }
 
-    fun initLensEngine(context: Context?) {
-        lensEngine = LensEngine.Creator(context, analyzer)
-            .setLensType(LensEngine.FRONT_LENS)
-            .applyDisplayDimension(width, height)
-            .applyFps(30.0f)
-            .enableAutomaticFocus(true)
-            .create()
+    fun initLensEngine(context: Context?,analyzeType: Int) {
+        when(analyzeType) {
+            0 -> lensEngine = LensEngine.Creator(context, faceAnalyzer)
+                    .setLensType(LensEngine.FRONT_LENS)
+                    .applyDisplayDimension(width, height)
+                    .applyFps(30.0f)
+                    .enableAutomaticFocus(true)
+                    .create()
+
+           1 -> lensEngine = LensEngine.Creator(context, handAnalyzer)
+               .setLensType(LensEngine.FRONT_LENS)
+               .applyDisplayDimension(width, height)
+               .applyFps(30.0f)
+               .enableAutomaticFocus(true)
+               .create()
+        }
     }
 
-    //start preview
     fun startLensEngine(preview: LensEnginePreview) {
             try {
                 preview.start(lensEngine)
@@ -66,12 +87,13 @@ object GameUtils {
             }
     }
 
-    fun stopPreview(mPreview: LensEnginePreview) {
-        mPreview.stop()
-    }
+    fun stopPreview(mPreview: LensEnginePreview) = mPreview.stop()
 
-    fun releaseAnalyze() {
+    fun releaseAnalyze(analyzeType: Int) {
         lensEngine?.release()
-        analyzer?.destroy()
+        when(analyzeType) {
+          0 -> faceAnalyzer?.destroy()
+          1 -> handAnalyzer?.destroy()
+        }
     }
 }

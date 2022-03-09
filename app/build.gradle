@@ -46,6 +46,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
+    implementation 'com.huawei.hms:ml-computer-vision-face:3.3.0.300'
     implementation 'com.huawei.hms:ml-computer-vision-handkeypoint:3.3.0.300'
     implementation 'com.huawei.hms:ml-computer-vision-handkeypoint-model:3.3.0.300'
 

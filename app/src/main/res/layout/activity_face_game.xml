@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:keepScreenOn="true"
-    tools:context=".ui.HandGameActivity">
+    tools:context=".ui.FaceGameActivity">
 
     <com.hms.crazyrocket.camera.LensEnginePreview
         android:id="@+id/preview"
@@ -13,12 +13,12 @@
         android:layout_height="match_parent"/>
 
     <com.hms.crazyrocket.view.GameGraphic
-        android:id="@+id/graphic"
+        android:id="@+id/game_graphic"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <RelativeLayout
-        android:id="@+id/gamestart"
+        android:id="@+id/game_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,22 +29,16 @@
         <RelativeLayout
             android:layout_width="312dp"
             android:layout_height="242dp"
-            android:background="@drawable/handstart"
+            android:background="@drawable/gamestart"
             android:layout_centerHorizontal="true">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/handdescription"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="24dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="159dp"
+                android:layout_marginTop="140dp"
                 android:layout_marginStart="13dp"
                 android:layout_marginEnd="13dp"
                 android:textColor="#FFFFFF"
-                android:text="@string/handcontrol"/>
+                android:text="@string/facecontrol"/>
         </RelativeLayout>
         <ImageView
             android:id="@+id/start"
@@ -56,7 +50,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/gameover"
+        android:id="@+id/game_over"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,6 +100,7 @@
             android:src="@drawable/exit"
             android:layout_marginTop="228dp"
             android:layout_marginStart="56dp"/>
+
         <ImageView
             android:id="@+id/restart"
             android:layout_width="wrap_content"

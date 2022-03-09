@@ -3,21 +3,22 @@ package com.hms.crazyrocket.ui
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.Window
 import android.widget.RadioGroup
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import com.hms.crazyrocket.R
 import com.hms.crazyrocket.databinding.ActivityMainBinding
-import com.hms.crazyrocket.util.GameUtils
 import com.hms.crazyrocket.util.viewBinding
+import com.hms.crazyrocket.util.GameUtils.createFaceAnalyze
+import com.hms.crazyrocket.util.GameUtils.createHandAnalyze
+import com.hms.crazyrocket.util.GameUtils.getMagnification
+import com.hms.crazyrocket.util.GameUtils.initLensEngine
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -62,15 +63,39 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initListener() {
+        binding.face.setOnClickListener {
+
+            if (!isGranted(Manifest.permission.CAMERA)) {
+                requestPermission()
+            }
+            else {
+                createFaceAnalyze()
+                magnification = getMagnification() + 0.5f
+
+                initLensEngine(this@MainActivity,0)
+
+                val faceIntent = Intent(this@MainActivity, FaceGameActivity::class.java)
+
+                when (choice) {
+                    0 -> faceIntent.putExtra(getString(R.string.level), 8)
+                    1 -> faceIntent.putExtra(getString(R.string.level), 4)
+                    2 -> faceIntent.putExtra(getString(R.string.level), 1)
+
+                }
+                faceIntent.putExtra(getString(R.string.magnification), magnification)
+                startActivity(faceIntent)
+            }
+        }
+
         binding.hand.setOnClickListener {
 
             if (!isGranted(Manifest.permission.CAMERA)) {
                 requestPermission()
             }
             else {
-                GameUtils.createHandAnalyze()
-                magnification = GameUtils.getMagnification() + 0.5f
-                GameUtils.initLensEngine(this@MainActivity)
+                createHandAnalyze()
+                magnification = getMagnification() + 0.5f
+                initLensEngine(this@MainActivity,1)
 
                 val handIntent = Intent(this@MainActivity, HandGameActivity::class.java)
 

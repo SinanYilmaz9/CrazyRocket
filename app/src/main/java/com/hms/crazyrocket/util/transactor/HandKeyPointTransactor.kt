@@ -1,4 +1,4 @@
-package com.hms.crazyrocket.util
+package com.hms.crazyrocket.util.transactor
 
 import android.util.SparseArray
 import com.hms.crazyrocket.view.GameGraphic

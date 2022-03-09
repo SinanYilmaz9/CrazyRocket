@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/projects/CrazyRocket/app/src/main/res/layout/activity_face_game.xml" value="0.371875" />
         <entry key="..\:/projects/CrazyRocket/app/src/main/res/layout/activity_hand_game.xml" value="0.10190217391304347" />
         <entry key="..\:/projects/CrazyRocket/app/src/main/res/layout/activity_main.xml" value="0.20885416666666667" />
         <entry key="..\:/projects/CrazyRocket/app/src/main/res/layout/custom_dialog_layout.xml" value="0.18085106382978725" />
@@ -10,7 +11,7 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="Android Studio java home" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="Android Studio java home" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
