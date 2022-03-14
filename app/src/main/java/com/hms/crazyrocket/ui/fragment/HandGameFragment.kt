@@ -1,43 +1,43 @@
-package com.hms.crazyrocket.ui
+package com.hms.crazyrocket.ui.fragment
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.hms.crazyrocket.R
 import com.hms.crazyrocket.camera.LensEnginePreview
-import com.hms.crazyrocket.databinding.ActivityHandGameBinding
-import com.hms.crazyrocket.view.GameGraphic
+import com.hms.crazyrocket.databinding.FragmentHandGameBinding
 import com.hms.crazyrocket.util.GameUtils
 import com.hms.crazyrocket.util.viewBinding
+import com.hms.crazyrocket.view.GameGraphic
 
-class HandGameActivity : AppCompatActivity() {
+class HandGameFragment : BaseFragment(R.layout.fragment_hand_game) {
 
-    private val binding by viewBinding(ActivityHandGameBinding::inflate)
+    private val binding by viewBinding(FragmentHandGameBinding::bind)
 
     private var lensEnginePreview: LensEnginePreview? = null
     private var gameGraphic: GameGraphic? = null
 
-    private var level = 4
-    private var magnification = 1f
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
-        setup()
         initListeners()
+        setup()
     }
 
     private fun setup() {
         lensEnginePreview = binding.preview
         gameGraphic = binding.graphic
 
-        intent?.let { i->
-            level = i.getIntExtra(getString(R.string.level), 4)
-            magnification = i.getFloatExtra(getString(R.string.magnification), 1f)
+        val bundle = arguments
+        if (bundle == null) {
+            Log.e("HandGameFragment", "HandGameFragment did not receive information")
+            return
         }
-        gameGraphic?.initData(this,binding.gameover,binding.score, level, magnification)
+
+        val args = HandGameFragmentArgs.fromBundle(bundle)
+
+        gameGraphic?.initData(binding.root.context,binding.gameover,binding.score, args.level, args.magnification)
 
         gameGraphic?.let { GameUtils.setHandTransactor(it) }
     }
@@ -49,7 +49,9 @@ class HandGameActivity : AppCompatActivity() {
             gameGraphic?.invalidate()
         }
 
-        binding.exit.setOnClickListener { finish() }
+        binding.exit.setOnClickListener {
+            findNavController().navigate(R.id.action_handGameFragment_to_homeFragment)
+        }
 
         binding.restart.setOnClickListener {
             binding.gameover.visibility = View.GONE
@@ -72,4 +74,5 @@ class HandGameActivity : AppCompatActivity() {
         super.onDestroy()
         GameUtils.releaseAnalyze(1)
     }
+
 }

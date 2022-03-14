@@ -1,0 +1,1 @@
+D:\projects\CrazyRocket\buildSrc\build\classes\kotlin\main\ClassPaths.class;D:\projects\CrazyRocket\buildSrc\build\classes\kotlin\main\Configs.class;D:\projects\CrazyRocket\buildSrc\build\classes\kotlin\main\Dependencies.class;D:\projects\CrazyRocket\buildSrc\build\classes\kotlin\main\Plugins.class;D:\projects\CrazyRocket\buildSrc\build\classes\kotlin\main\Versions.class

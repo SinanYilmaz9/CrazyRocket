@@ -15,9 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CrazyRocket">
         <activity
-            android:name=".ui.FaceGameActivity"
-            android:screenOrientation="fullSensor"/>
-        <activity
             android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -26,9 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.HandGameActivity"
-            android:screenOrientation="fullSensor" />
 
         <meta-data
             android:name="com.huawei.hms.ml.DEPENDENCY"

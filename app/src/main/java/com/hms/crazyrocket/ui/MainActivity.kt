@@ -1,23 +1,11 @@
 package com.hms.crazyrocket.ui
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.RadioGroup
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.AppCompatButton
-import com.hms.crazyrocket.R
+import androidx.appcompat.app.AppCompatActivity
 import com.hms.crazyrocket.databinding.ActivityMainBinding
 import com.hms.crazyrocket.util.viewBinding
-import com.hms.crazyrocket.util.GameUtils.createFaceAnalyze
-import com.hms.crazyrocket.util.GameUtils.createHandAnalyze
-import com.hms.crazyrocket.util.GameUtils.getMagnification
-import com.hms.crazyrocket.util.GameUtils.initLensEngine
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,110 +20,12 @@ class MainActivity : AppCompatActivity() {
         private const val REQUEST_CODE = 1
     }
 
-    private var radioGroup: RadioGroup? = null
-    private var cancel: AppCompatButton? = null
-    private var dialog: AlertDialog? = null
-
-    private var magnification = 1f
-    private var choice = 0
-    private var pickString: Array<String> = arrayOf()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        initData()
-        setupDialog()
-        initListener()
-    }
-
-    private fun setupDialog() {
-        val view: View = LayoutInflater.from(this).inflate(R.layout.custom_dialog_layout, null)
-        radioGroup = view.findViewById(R.id.radio_group)
-        cancel = view.findViewById(R.id.cancel)
-        val builder = AlertDialog.Builder(this).setView(view)
-
-        dialog = builder.create()
-        dialog?.window.apply {
-            this?.setBackgroundDrawableResource(android.R.color.transparent)
-            this?.setGravity(Gravity.BOTTOM)
-        }
-    }
-
-    private fun initListener() {
-        binding.face.setOnClickListener {
-
-            if (!isGranted(Manifest.permission.CAMERA)) {
-                requestPermission()
-            }
-            else {
-                createFaceAnalyze()
-                magnification = getMagnification() + 0.5f
-
-                initLensEngine(this@MainActivity,0)
-
-                val faceIntent = Intent(this@MainActivity, FaceGameActivity::class.java)
-
-                when (choice) {
-                    0 -> faceIntent.putExtra(getString(R.string.level), 8)
-                    1 -> faceIntent.putExtra(getString(R.string.level), 4)
-                    2 -> faceIntent.putExtra(getString(R.string.level), 1)
-
-                }
-                faceIntent.putExtra(getString(R.string.magnification), magnification)
-                startActivity(faceIntent)
-            }
-        }
-
-        binding.hand.setOnClickListener {
-
-            if (!isGranted(Manifest.permission.CAMERA)) {
-                requestPermission()
-            }
-            else {
-                createHandAnalyze()
-                magnification = getMagnification() + 0.5f
-                initLensEngine(this@MainActivity,1)
-
-                val handIntent = Intent(this@MainActivity, HandGameActivity::class.java)
-
-                when (choice) {
-                    0 -> handIntent.putExtra(getString(R.string.level), 8)
-                    1 -> handIntent.putExtra(getString(R.string.level), 4)
-                    2 -> handIntent.putExtra(getString(R.string.level), 1)
-                }
-                handIntent.putExtra(getString(R.string.magnification), magnification)
-                startActivity(handIntent)
-            }
-        }
-
-        binding.linearLevel.setOnClickListener { dialog?.show() }
-
-        cancel?.setOnClickListener { dialog?.cancel() }
-
-        radioGroup?.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
-                R.id.hight -> {
-                    choice = 0
-                    binding.level.text = pickString[choice]
-                }
-
-                R.id.middle -> {
-                    choice = 1
-                    binding.level.text = pickString[choice]
-                }
-
-                R.id.low -> {
-                    choice = 2
-                    binding.level.text = pickString[choice]
-                }
-            }
-            dialog?.dismiss()
-        }
-    }
-
-    private fun initData() {
-        pickString = arrayOf(getString(R.string.hight), getString(R.string.middle), getString(R.string.low))
+        if (!isGranted(Manifest.permission.CAMERA))
+        requestPermission()
     }
 
     private fun isGranted(permission: String): Boolean {

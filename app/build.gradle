@@ -1,18 +1,32 @@
 plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'com.huawei.agconnect'
+    id "org.sonarqube" version "3.0"
+}
+
+apply plugin: Plugins.androidPlugin
+apply plugin: Plugins.kotlinPlugin
+apply plugin: Plugins.agcPlugin
+apply plugin: Plugins.kapt
+apply plugin: Plugins.safeArgsPlugin
+
+sonarqube {
+    properties{
+        property "sonar.projectKey", "crazyRocket"
+        property "sonar.projectName", "crazyRocket"
+        property "sonar.login", "84a2ffcd87556a433c58b3d22c8be27da2b03029"
+        property "sonar.host.url", "http://10.216.72.212:9000"
+        property "sonar.projectVersion", android.defaultConfig.versionName
+    }
 }
 
 android {
-    compileSdk 31
+    compileSdk Configs.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.hms.crazyrocket"
-        minSdk 24
-        targetSdk 31
-        versionCode 1
-        versionName "1.0"
+        applicationId Configs.applicationId
+        minSdk Configs.minSdkVersion
+        targetSdk Configs.targetSdkVersion
+        versionCode Configs.versionCode
+        versionName Configs.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -38,16 +52,21 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation Dependencies.coreKtx
+    implementation Dependencies.appCompat
+    implementation Dependencies.material
+    implementation Dependencies.constraintLayout
+    testImplementation Dependencies.jUnit
+    androidTestImplementation Dependencies.testJUnit
+    androidTestImplementation Dependencies.espressoCore
 
-    implementation 'com.huawei.hms:ml-computer-vision-face:3.3.0.300'
-    implementation 'com.huawei.hms:ml-computer-vision-handkeypoint:3.3.0.300'
-    implementation 'com.huawei.hms:ml-computer-vision-handkeypoint-model:3.3.0.300'
+    implementation Dependencies.mlFace
+    implementation Dependencies.mlHandKeyPoint
+    implementation Dependencies.mlHandKeyPointModel
+
+    implementation Dependencies.lifeCycleCommon
+
+    implementation Dependencies.navigationUi
+    implementation Dependencies.navigationFragment
 
 }
