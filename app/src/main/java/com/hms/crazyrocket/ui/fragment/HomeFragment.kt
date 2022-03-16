@@ -76,7 +76,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                     2 -> selectedLevel = 1
                 }
 
-                val directions = HomeFragmentDirections.actionHomeFragmentToFaceGameFragment(selectedLevel,magnification)
+                val directions = HomeFragmentDirections.actionHomeFragmentToHandGameFragment(selectedLevel,magnification)
                 findNavController().navigate(directions)
         }
 
