@@ -7,8 +7,6 @@
 * [More Scenarios](#more-scenarios)
 * [Procedure](#procedure)
 * [Supported Environments](#supported-environments)
-* [License] (#license)
-
 
 ## Introduction
 CrazyRockets uses the facial recognition and gesture recognition functions of Huawei ML Kit to move small rockets to avoid obstacles.
